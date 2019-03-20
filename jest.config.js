@@ -4,7 +4,6 @@ module.exports = {
   testPathIgnorePatterns: [
     "/node_modules/",
     "/src/fake.spec.ts",
-    // "/src/main/",
     "/src/datatypes/",
     "/src/params/",
     "/src/functions/",
