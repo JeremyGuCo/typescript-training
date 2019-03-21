@@ -22,14 +22,19 @@ describe('Template literals', () => {
 
   it('should support multi-line strings', () => {
     // construct a string with multiple lines without needing escaped newline characters
-    const multiLine = `\n    Oh\n    my\n    dear\n    so much fun!`
+    const multiLine = `
+    Oh
+    my
+    dear
+    so much fun!`
 
     expect(multiLine).toBe('\n    Oh\n    my\n    dear\n    so much fun!')
   })
 
   it('should support string escaping', () => {
     // escape a string in a template literal for each of these
-    expect('Hi\nthere!').toBe('Hi\nthere!')
+    expect(`Hi
+there!`).toBe('Hi\nthere!')
     expect('This is `escaped` backtics').toBe('This is `escaped` backtics')
   })
 

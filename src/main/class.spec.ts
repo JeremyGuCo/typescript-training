@@ -61,26 +61,35 @@ describe('class', () => {
     // create a static method create that encapsulates calling constructor
     //   and storing the reference (in instances array) and returns the instance
     class Musician {
-      instrument: String;
-      static instances: Array<Musician> = [];
+      instrument: string;
+
+      static instances: Musician[] = [];
+
       constructor(instrument: string) {
         this.instrument = instrument;
       }
-      static create(instrument: string) {
-        let instance;
-        if (instrument) {
-          instance = new Musician(instrument);
-        } else {
-          instance = new Musician();
-        }
-        Musician.instances.push(instance);
-        return instance;
+
+      play() {
+        return `I'm playing ${this.instrument}`
       }
-}
+
+      static playAll() {
+        for (let i = 0; i < Musician.instances.length; i++) {
+          console.log(Musician.instances[i].play())
+        }
+      }
+
+      static create(instrument: string): Musician {
+        const musician = new Musician(instrument);
+        Musician.instances.push(musician);
+        return musician;
+      }
+    }
+
     expect(Musician.create).toBeDefined()
     expect(Musician.instances.length).toBe(0)
 
-    const john = Musician.create()
+    const john = Musician.create('piano')
     // expect(john.create).toBeUndefined()
     expect(Musician.instances.length).toBe(1)
 
@@ -144,16 +153,17 @@ class Rockman extends Musician {
     // - it will add this band to the list of musician's bands'. How to store them?
 
     class Musician {
+      _band:string[]=[];
       constructor() {
-        this.bands = [];
+        this._band = [];
       }
 
       set band(name) {
-        this.bands.push(name);
+        this._band.push(name);
       }
 
       get allBands() {
-        return `this musician played in ${this.bands.join(', ')}`;
+        return `this musician played in ${this._band.join(', ')}`;
       }
 }
 
